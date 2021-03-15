@@ -6,22 +6,8 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title> Messages</title>
      <script src="https://code.jquery.com/jquery-latest.js">
-     
-     $('#postMessage').submit(function(event){ event.preventDefault();
-
-     var $form = $(this),
-      message = $form.find("input[name='message']").val(),
-      url = $form.attr('action');
-     $ajax({
-          type: 'POST',
-          url: url,
-          data : JSON.stringify({message:message}),
-          contentType: 'application/json',
-          dataType: 'json',
-          success :function() {location.reload();}
-     });
-});
      </script>
+     <script src="./static/static.js"></script>
      
 </head>
 <body>
@@ -32,6 +18,9 @@
      <input type="submit" value="Post">
 
 </form>
+<div id='messageContainer'>
+
+</div>
      {% if messages %}
           {% for message in messages%}
             <p>{{ message.get('message') }} </p>

@@ -70,10 +70,21 @@ class WebServer:
 
           return 204, ''
 
+     @http('GET', '/messages')
+     def get_messages(self, request):
+          messages = self.message_service.get_all_messages()
+          return create_json_response(messages)
+
+
 
 def create_html_response(content):
      headers = {'Content-Type': 'text/html'}
      return Response(content, status=200, headers=headers)
+
+def create_json_response(content):
+     headers = {'Content-Type':'application/json'}
+     json_data = json.dumps(content)
+     return Response(json_data, status = 200, headers=headers)
 
 
 
