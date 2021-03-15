@@ -1,6 +1,6 @@
 from redis import  RedisError, StrictRedis
 from nameko.extensions import DependencyProvider
-
+from uuid import uuid4 as ui4
 
 
 class RedisClient:
@@ -10,10 +10,20 @@ class RedisClient:
      
      def get_message(self, message_id):
           message = self.redis.get(message_id)
-
-          if message is None:
-               return RedisError(f'Message Not Found!{message_id}')
           return message
+
+     def save_message(self, message):
+          message_id = ui4().hex
+          self.redis.set(message_id, message)
+
+          return message_id
+
+     def get_all_messages(self):
+          messages = [{'id': message_id,
+                       'message' : self.get_message(message_id)} for message_id in self.redis.keys() ]
+          return messages
+
+     
 
 class MessageStore(DependencyProvider):
      def setup(self):
