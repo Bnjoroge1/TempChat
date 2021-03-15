@@ -9,6 +9,7 @@ from .dependencies.redis_client import  MessageStore
 from .dependencies.jinja_render import TemplateRenderer, Jinja2
 import json
 
+from operator import itemgetter
 
 
 class MessageService:
@@ -26,7 +27,13 @@ class MessageService:
      
      @rpc
      def get_all_messages(self):
-          return self.message_store.get_all_messages()
+          messages = self.message_store.get_all_messages()
+          sorted_messages = sort_messages_by_expiry(messages)
+          return sorted_messages
+
+
+def sort_messages_by_expiry(messages, reverse=False):
+     return sorted(messages, key=itemgetter('expires_in'), reverse=True)
 
 
 class WebServer:
@@ -43,7 +50,7 @@ class WebServer:
 
           return html_response
      
-     @http('POST','/post')
+     @http('POST','/messages')
      def post_message(self, request):
           data_text = request.get_data(as_text=True)
 
