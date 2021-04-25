@@ -1,0 +1,6 @@
+
+FLASK_SECRET_KEY: '99962e8bf73b4654ba290624c4c46360'
+
+FLASK_APP: 'Tempchat/web_service.py'
+
+FLASK_DEBUG: 1

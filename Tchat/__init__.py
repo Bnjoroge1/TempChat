@@ -1,4 +1,4 @@
 from .dependencies import jinja_render, redis_client
-from . import service, user_service
+from . import service, user_service, web_service
 
 

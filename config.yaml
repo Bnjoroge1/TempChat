@@ -4,3 +4,7 @@ REDIS_URL: 'redis://localhost:6379'
 
 DB_URIS:
  user_service:Base: "postgresql+psycopg2://postgres:localhost/tempchat/client_encoding=utf8"
+
+
+
+FLASK_DEBUG: 1

@@ -6,7 +6,7 @@ from redis import RedisError
 from werkzeug.wrappers import Response
 
 from .dependencies.redis_client import  MessageStore
-from .dependencies.jinja_render import TemplateRenderer, Jinja2
+from  .dependencies.jinja_render import TemplateRenderer, Jinja2
 import json
 
 from operator import itemgetter
